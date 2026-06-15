@@ -20,48 +20,47 @@
             min-height: 100vh;
             overflow: hidden;
             text-align: center;
-            padding: 15px;
+            padding: 12px;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            padding: 2rem 1.5rem; /* Reduced padding for mobile screens */
-            border-radius: 28px;
-            box-shadow: 0 15px 40px rgba(244, 63, 94, 0.1);
-            max-width: 420px;
+            padding: 1.8rem 1.2rem;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(244, 63, 94, 0.1);
+            max-width: 380px;
             width: 100%;
             border: 2px solid #ffe4e6;
             position: relative;
-            transition: all 0.3s ease;
         }
 
         .cute-icon {
-            font-size: 3.5rem; /* Slightly smaller for mobile layout */
-            margin-bottom: 1rem;
+            font-size: 3rem;
+            margin-bottom: 0.8rem;
             display: inline-block;
             animation: float 3s infinite ease-in-out;
         }
 
         @keyframes float {
             0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(3deg); }
+            50% { transform: translateY(-6px) rotate(3deg); }
             100% { transform: translateY(0px) rotate(0deg); }
         }
 
         h1 {
             color: #be123c;
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
             font-weight: 700;
         }
 
         p {
             color: #4c566a;
-            font-size: 1rem;
+            font-size: 0.95rem;
             line-height: 1.6;
-            margin-bottom: 2rem;
+            margin-bottom: 1.8rem;
             font-weight: 500;
         }
 
@@ -69,8 +68,8 @@
             color: #be123c;
             font-weight: 700;
             background: #ffe4e6;
-            padding: 2px 8px;
-            border-radius: 8px;
+            padding: 2px 6px;
+            border-radius: 6px;
             display: inline-block;
         }
 
@@ -78,46 +77,45 @@
             color: #0d9488;
             font-weight: 700;
             background: #ccfbf1;
-            padding: 4px 10px;
-            border-radius: 10px;
+            padding: 4px 8px;
+            border-radius: 8px;
             display: inline-block;
             margin-top: 5px;
         }
 
-        /* Fixed separate positioning for the buttons initially */
         .btn-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            margin-top: 1rem;
-            min-height: 55px;
-            padding: 0 10px;
+            margin-top: 0.5rem;
+            min-height: 50px;
+            padding: 0 5px;
         }
 
         button {
-            padding: 0.8rem 1.8rem;
-            font-size: 1rem;
+            padding: 0.75rem 0;
+            font-size: 0.95rem;
             font-weight: 700;
             border: none;
-            border-radius: 18px;
+            border-radius: 16px;
             cursor: pointer;
             font-family: inherit;
-            touch-action: manipulation; /* Optimizes mobile taps */
+            touch-action: manipulation;
         }
 
         #yesBtn {
             background: linear-gradient(135deg, #fb7185, #f43f5e);
             color: white;
-            box-shadow: 0 6px 15px rgba(244, 63, 94, 0.3);
-            width: 55%; /* Ensures Yes button has plenty of tap area */
+            box-shadow: 0 5px 12px rgba(244, 63, 94, 0.25);
+            width: 58%;
         }
 
         #noBtn {
             background-color: #f1f5f9;
             color: #94a3b8;
             border: 2px solid #e2e8f0;
-            width: 35%;
+            width: 36%;
             z-index: 10;
         }
 
@@ -133,8 +131,8 @@
 
         .celebrate-panel h2 {
             color: #0d9488;
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
             font-weight: 700;
         }
     </style>
@@ -147,8 +145,8 @@
         <div id="questionScreen">
             <div class="cute-icon">🥳🎓✨</div>
             <h1>Finally, Exams Are OVER! 🎉</h1>
-            <p>Congratulations <span class="name-highlight">Dr. Avisha!</span> Aapne bohot zyada mehnat ki hai and you finally smashed it. Ab saari books ko side me rakho aur relax karo. <br><br>Is exhaustion ko dur karne ke liye aur exam khatam hone ki khushi me, kya hum ek mast chilled-out sunset spot par chalein? <br>
-            <span class="highlight-box">Jahan thandi sea breeze ho, calm waves hon aur achi shanti mile... 🌅</span></p>
+            <p>Congratulations <span class="name-highlight">Dr. Avisha!</span> Aapne bohot mehnat ki hai and you finally smashed it. Ab saari books side me rakho aur relax karo. <br><br>Is khushi me, kya hum ek mast chilled-out sunset spot par chalein? <br>
+            <span class="highlight-box">Jahan thandi sea breeze ho aur calm waves hon... 🌅</span></p>
             
             <div class="btn-container" id="buttonArea">
                 <button id="yesBtn" onclick="showCelebration()">Yes, chalte hain! 😎</button>
@@ -160,7 +158,7 @@
         <div class="celebrate-panel" id="celebrationScreen">
             <div class="cute-icon">🌊🚗🍦</div>
             <h2>Nice choice! Let's go... ✔️</h2>
-            <p>Sach me, it's going to be great, <span class="name-highlight">Dr. Avisha!</span> Location ek surprise hai, par wahan se view aur thandi hawayein sach me bohot chill hain. <br><br>Aap bilkul tension free hoker bas aaram karo, plan is officially locked! Click karne ke liye thank you! ✨👊</p>
+            <p>Sach me, it's going to be great, <span class="name-highlight">Dr. Avisha!</span> Location ek surprise hai, par wahan se view aur thandi hawayein sach me bohot chill hain. <br><br>Aap bilkul tension free hoker bas aaram karo, plan is officially locked! Thank you! ✨👊</p>
         </div>
     </div>
 
@@ -169,7 +167,6 @@
         let isAbsolute = false;
 
         function dodgeButton(event) {
-            // Prevents zoom/double tap glitch on phones
             if (event) event.preventDefault(); 
             
             const noBtn = document.getElementById('noBtn');
@@ -182,21 +179,21 @@
                 isAbsolute = true;
             }
             
-            let scale = Math.max(1 - clickCount * 0.12, 0.5);
+            let scale = Math.max(1 - clickCount * 0.12, 0.55);
             noBtn.style.transform = `scale(${scale})`;
             
             if(clickCount >= 3) {
                 noBtn.innerText = "🥺";
             }
 
-            // Tight boundary boxes so the button never runs off the screen edge on mobile layout
-            const padding = 16;
+            // Confine strictly inside the smaller card bounds
+            const padding = 12;
             const maxX = card.clientWidth - noBtn.clientWidth - padding;
             const maxY = card.clientHeight - noBtn.clientHeight - padding;
             
             const randomX = Math.floor(Math.random() * maxX);
-            // Confines vertical movement safely near the bottom of the card
-            const randomY = Math.floor(Math.random() * (maxY - 220)) + 180; 
+            // Positions the running button safely inside the lower section of the card
+            const randomY = Math.floor(Math.random() * (maxY - 160)) + 140; 
             
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
