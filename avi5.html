@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Surprise For Dr. Avisha 🩺🌸</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Quicksand', 'Nunito', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #fff1f2, #e0f2fe, #f0fdf4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 3.5rem 2rem;
+            border-radius: 32px;
+            box-shadow: 0 20px 50px rgba(244, 63, 94, 0.1);
+            max-width: 480px;
+            width: 100%;
+            border: 2px solid #ffe4e6;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .cute-icon {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(3deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        h1 {
+            color: #be123c;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+        }
+
+        p {
+            color: #4c566a;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            font-weight: 500;
+            padding: 0 10px;
+        }
+
+        .name-highlight {
+            color: #be123c;
+            font-weight: 700;
+            background: #ffe4e6;
+            padding: 2px 10px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .highlight-box {
+            color: #0d9488;
+            font-weight: 700;
+            background: #ccfbf1;
+            padding: 4px 10px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            margin-top: 1rem;
+            min-height: 60px;
+        }
+
+        button {
+            padding: 0.9rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        #yesBtn {
+            background: linear-gradient(135deg, #fb7185, #f43f5e);
+            color: white;
+            box-shadow: 0 8px 20px rgba(244, 63, 94, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 12px 24px rgba(244, 63, 94, 0.4);
+        }
+
+        #noBtn {
+            background-color: #f1f5f9;
+            color: #94a3b8;
+            border: 2px solid #e2e8f0;
+            transition: transform 0.1s ease;
+        }
+
+        .celebrate-panel {
+            display: none;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .celebrate-panel h2 {
+            color: #0d9488;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="card" id="mainCard">
+        <!-- Main Invitation Screen -->
+        <div id="questionScreen">
+            <div class="cute-icon">🥳🎓✨</div>
+            <h1>Finally, Exams Are OVER! 🎉</h1>
+            <p>Congratulations <span class="name-highlight">Dr. Avisha!</span> Aapne bohot zyada mehnat ki hai and you finally smashed it. Ab saari books ko side me rakho aur relax karo. <br><br>Is exhaustion ko dur karne ke liye aur exam khatam hone ki khushi me, kya hum ek mast chilled-out sunset spot par chalein? <br>
+            <span class="highlight-box">Jahan thandi sea breeze ho, calm waves hon aur achi shanti mile... 🌅</span></p>
+            
+            <div class="btn-container" id="buttonArea">
+                <button id="yesBtn" onclick="showCelebration()">Yes, chalte hain! 😎</button>
+                <button id="noBtn" onmouseover="dodgeButton()" onclick="dodgeButton()">No</button>
+            </div>
+        </div>
+
+        <!-- Success Screen -->
+        <div class="celebrate-panel" id="celebrationScreen">
+            <div class="cute-icon">🌊🚗🍦</div>
+            <h2>Nice choice! Let's go... ✔️</h2>
+            <p>Sach me, it's going to be great, <span class="name-highlight">Dr. Avisha!</span> Location ek surprise hai, par wahan se view aur thandi hawayein sach me bohot chill hain. <br><br>Aap bilkul tension free hoker bas aaram karo, plan is officially locked! Click karne ke liye thank you! ✨👊</p>
+        </div>
+    </div>
+
+    <script>
+        let clickCount = 0;
+        let isAbsolute = false;
+
+        function dodgeButton() {
+            const noBtn = document.getElementById('noBtn');
+            const card = document.getElementById('mainCard');
+            
+            clickCount++;
+            
+            if (!isAbsolute) {
+                noBtn.style.position = 'absolute';
+                isAbsolute = true;
+            }
+            
+            let scale = Math.max(1 - clickCount * 0.12, 0.45);
+            noBtn.style.transform = `scale(${scale})`;
+            
+            if(clickCount >= 3) {
+                noBtn.innerText = "🥺";
+            }
+
+            const padding = 24;
+            const maxX = card.clientWidth - noBtn.clientWidth - padding;
+            const maxY = card.clientHeight - noBtn.clientHeight - padding;
+            
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * (maxY - 160)) + 120; 
+            
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        function showCelebration() {
+            document.getElementById('questionScreen').style.display = 'none';
+            document.getElementById('celebrationScreen').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
