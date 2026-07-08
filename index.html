@@ -159,7 +159,6 @@
             margin-bottom: 20px;
         }
         
-        /* Updated Video Wrapper to support Embedded Player smoothly */
         .video-wrapper {
             position: relative;
             width: 100%;
@@ -230,13 +229,13 @@
 
         @media (max-width: 600px) {
             .options-bar { grid-template-columns: 1fr; }
-            .movie-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .movie-header { flex-direction: column; align-items: flex-start; gap: 10px; width: 100%; }
+            .movie-header button { width: 100%; text-align: center; margin-top: 10px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Step 1: Premium Pass Invite Ticket -->
     <div class="intro-overlay" id="introOverlay">
         <div class="ticket-card">
             <div class="ticket-header">Admit One</div>
@@ -266,22 +265,20 @@
         </div>
     </div>
 
-    <!-- Step 2: High-End Buffer Stage Animation -->
     <div class="loader-container" id="loaderContainer">
         <h2>Configuring Theater Stream...</h2>
         <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
     </div>
 
-    <!-- Step 3: Main Layout Terminal Screen -->
     <div class="main-container" id="mainContainer">
         <div class="theater-box">
             <div class="video-wrapper">
-                <!-- Using Embedded Preview Player to safely bypass the 100MB file limit -->
-                <iframe src="https://drive.google.com/file/d/1pf6w8yVh3Bw21xBWalHPvdboQiFoXw3H/preview" allow="autoplay"></iframe>
+                <iframe id="cinemaFrame" src="https://drive.google.com/file/d/1pf6w8yVh3Bw21xBWalHPvdboQiFoXw3H/preview" allow="autoplay; fullscreen"></iframe>
             </div>
             
             <div class="movie-header">
                 <h2 class="movie-title">Miss Avisha's Private Cinema</h2>
+                <button class="action-btn" onclick="makeFullscreen()" style="padding: 8px 16px; font-size: 0.85rem; border-color: var(--accent-color);">📺 Maximize</button>
             </div>
         </div>
 
@@ -292,7 +289,6 @@
         </div>
     </div>
 
-    <!-- Feedback Feature Terminal Box -->
     <div class="modal" id="reviewModal">
         <div class="modal-content">
             <h3>Rate the Project Stream</h3>
@@ -355,6 +351,17 @@
         function copyStreamLink() {
             navigator.clipboard.writeText(window.location.href);
             alert('Website URL copied to device clipboard.');
+        }
+
+        function makeFullscreen() {
+            const frame = document.getElementById('cinemaFrame');
+            if (frame.requestFullscreen) {
+                frame.requestFullscreen();
+            } else if (frame.webkitRequestFullscreen) { /* Safari / iOS mobile support */
+                frame.webkitRequestFullscreen();
+            } else if (frame.msRequestFullscreen) {
+                frame.msRequestFullscreen();
+            }
         }
     </script>
 </body>
