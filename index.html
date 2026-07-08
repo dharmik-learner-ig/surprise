@@ -2,206 +2,359 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>A Special Surprise For Dr. Avisha 🩺🌸</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miss Avisha - Premium Cinema Experience</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-
+        :root {
+            --bg-color: #0d0b14;
+            --card-bg: #161424;
+            --btn-bg: #1e1b2c;
+            --text-color: #ffffff;
+            --accent-color: #bd93f9;
+        }
+        .light-theme {
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --btn-bg: #e4e6eb;
+            --text-color: #1c1e21;
+            --accent-color: #6200ee;
+        }
         body {
-            font-family: 'Quicksand', 'Nunito', 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #fff1f2, #e0f2fe, #f0fdf4);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
-            text-align: center;
-            padding: 12px;
+            padding: 20px;
+            overflow-x: hidden;
+            transition: background 0.3s, color 0.3s;
         }
 
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 1.8rem 1.2rem;
-            border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(244, 63, 94, 0.1);
+        /* Movie Ticket Welcoming Screen */
+        .intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #1b182b 0%, #0d0b14 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            padding: 20px;
+        }
+        .intro-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .ticket-card {
+            background: #ffffff;
+            color: #111;
+            padding: 30px;
+            border-radius: 20px;
             max-width: 380px;
             width: 100%;
-            border: 2px solid #ffe4e6;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             position: relative;
+            text-align: center;
+            border: 2px dashed #bd93f9;
+        }
+        .ticket-header {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #777;
+            margin-bottom: 5px;
+        }
+        .ticket-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #0d0b14;
+        }
+        .ticket-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+            text-align: left;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+        .info-label { color: #888; font-size: 0.75rem; text-transform: uppercase; }
+        .info-value { font-weight: 700; color: #222; }
+        
+        .barcode {
+            width: 80%;
+            height: 40px;
+            margin: 0 auto 20px auto;
+            background: linear-gradient(90deg, #000 2px, transparent 2px, #000 4px, transparent 4px, #000 7px, transparent 7px, #000 9px, transparent 9px, #000 12px, transparent 12px, #000 13px, transparent 13px, #000 17px, transparent 17px, #000 22px, transparent 22px);
+            background-size: 30px 100%;
         }
 
-        .cute-icon {
-            font-size: 3rem;
-            margin-bottom: 0.8rem;
-            display: inline-block;
-            animation: float 3s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-6px) rotate(3deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
-        }
-
-        h1 {
-            color: #be123c;
-            font-size: 1.5rem;
-            margin-bottom: 0.8rem;
+        .btn-gate {
+            background: linear-gradient(135deg, #bd93f9 0%, #ff79c6 100%);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1rem;
             font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(189, 147, 249, 0.4);
+            transition: transform 0.2s;
         }
 
-        p {
-            color: #4c566a;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 1.8rem;
-            font-weight: 500;
+        /* Cinematic Loading Screen Stage */
+        .loader-container {
+            display: none;
+            position: fixed;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #0d0b14;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 90;
+        }
+        .progress-track {
+            width: 200px; height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px; overflow: hidden; margin-top: 20px;
+        }
+        .progress-bar {
+            width: 0%; height: 100%;
+            background: linear-gradient(90deg, #bd93f9, #ff79c6);
+            transition: width 0.1s linear;
         }
 
-        .name-highlight {
-            color: #be123c;
-            font-weight: 700;
-            background: #ffe4e6;
-            padding: 2px 6px;
-            border-radius: 6px;
-            display: inline-block;
+        /* Main Theater Showcase Container */
+        .main-container {
+            width: 100%;
+            max-width: 900px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .main-container.visible { opacity: 1; transform: translateY(0); }
+
+        .theater-box {
+            background: var(--card-bg);
+            border: 1px solid rgba(189, 147, 249, 0.1);
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            margin-bottom: 20px;
+        }
+        
+        /* Updated Video Wrapper to support Embedded Player smoothly */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
-        .highlight-box {
-            color: #0d9488;
-            font-weight: 700;
-            background: #ccfbf1;
-            padding: 4px 8px;
-            border-radius: 8px;
-            display: inline-block;
-            margin-top: 5px;
-        }
-
-        .btn-container {
+        .movie-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
-            margin-top: 0.5rem;
-            min-height: 50px;
-            padding: 0 5px;
+            margin-top: 20px;
         }
+        .movie-title { font-size: 1.6rem; font-weight: 700; }
 
-        button {
-            padding: 0.75rem 0;
-            font-size: 0.95rem;
-            font-weight: 700;
-            border: none;
+        /* Setup Action Control Grid */
+        .options-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        .action-btn {
+            background: var(--btn-bg);
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 14px;
             border-radius: 16px;
+            font-size: 0.95rem;
+            font-weight: 600;
             cursor: pointer;
-            font-family: inherit;
-            touch-action: manipulation;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.2s;
         }
+        .action-btn:hover { transform: translateY(-2px); }
 
-        #yesBtn {
-            background: linear-gradient(135deg, #fb7185, #f43f5e);
-            color: white;
-            box-shadow: 0 5px 12px rgba(244, 63, 94, 0.25);
-            width: 58%;
+        /* Interactive Feedback Window Overlay */
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 150; opacity: 0; visibility: hidden;
+            transition: all 0.3s ease;
         }
-
-        #noBtn {
-            background-color: #f1f5f9;
-            color: #94a3b8;
-            border: 2px solid #e2e8f0;
-            width: 36%;
-            z-index: 10;
+        .modal.open { opacity: 1; visibility: visible; }
+        .modal-content {
+            background: var(--card-bg);
+            padding: 30px; border-radius: 20px;
+            max-width: 400px; width: 100%; text-align: center;
+            border: 1px solid rgba(189,147,249,0.3);
         }
+        .stars-row { display: flex; justify-content: center; gap: 10px; margin: 20px 0; }
+        .star-input { font-size: 2rem; cursor: pointer; color: #444; transition: color 0.2s; }
+        .star-input.active { color: #f1c40f; }
 
-        .celebrate-panel {
-            display: none;
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
-        @keyframes popIn {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .celebrate-panel h2 {
-            color: #0d9488;
-            font-size: 1.5rem;
-            margin-bottom: 0.8rem;
-            font-weight: 700;
+        @media (max-width: 600px) {
+            .options-bar { grid-template-columns: 1fr; }
+            .movie-header { flex-direction: column; align-items: flex-start; gap: 10px; }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="card" id="mainCard">
-        <!-- Main Invitation Screen -->
-        <div id="questionScreen">
-            <div class="cute-icon">🥳🎓✨</div>
-            <h1>Finally, Exams Are OVER! 🎉</h1>
-            <p>Congratulations <span class="name-highlight">Dr. Avisha!</span> Aapne bohot mehnat ki hai and you finally smashed it. Ab saari books side me rakho aur relax karo. <br><br>Aapke liye maine ek surprise plan kiya hai! Is khushi me, kya hum <span class="highlight-box">Malabar Hill</span> par chalein? <br>
-            <span class="highlight-box">Jahan se Queen's Necklace ka view bohot pyaara lagta hai... 🌅</span></p>
+    <!-- Step 1: Premium Pass Invite Ticket -->
+    <div class="intro-overlay" id="introOverlay">
+        <div class="ticket-card">
+            <div class="ticket-header">Admit One</div>
+            <h1 class="ticket-title">Miss Avisha</h1>
             
-            <div class="btn-container" id="buttonArea">
-                <button id="yesBtn" onclick="showCelebration()">Yes, chalte hain! 😎</button>
-                <button id="noBtn" ontouchstart="dodgeButton(event)" onmouseover="dodgeButton(event)" onclick="dodgeButton(event)">No</button>
+            <div class="ticket-info">
+                <div>
+                    <div class="info-label">Screen</div>
+                    <div class="info-value">Premium Web</div>
+                </div>
+                <div>
+                    <div class="info-label">Seat</div>
+                    <div class="info-value">Row A, Center</div>
+                </div>
+                <div>
+                    <div class="info-label">Date</div>
+                    <div class="info-value">Movie Night</div>
+                </div>
+                <div>
+                    <div class="info-label">Ticket No</div>
+                    <div class="info-value">#009742</div>
+                </div>
+            </div>
+
+            <div class="barcode"></div>
+            <button class="btn-gate" onclick="startLoadingSystem()">Scan Ticket & Enter 🎬</button>
+        </div>
+    </div>
+
+    <!-- Step 2: High-End Buffer Stage Animation -->
+    <div class="loader-container" id="loaderContainer">
+        <h2>Configuring Theater Stream...</h2>
+        <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+    </div>
+
+    <!-- Step 3: Main Layout Terminal Screen -->
+    <div class="main-container" id="mainContainer">
+        <div class="theater-box">
+            <div class="video-wrapper">
+                <!-- Using Embedded Preview Player to safely bypass the 100MB file limit -->
+                <iframe src="https://drive.google.com/file/d/1pf6w8yVh3Bw21xBWalHPvdboQiFoXw3H/preview" allow="autoplay"></iframe>
+            </div>
+            
+            <div class="movie-header">
+                <h2 class="movie-title">Miss Avisha's Private Cinema</h2>
             </div>
         </div>
 
-        <!-- Success Screen -->
-        <div class="celebrate-panel" id="celebrationScreen">
-            <div class="cute-icon">🌊🚗🍦</div>
-            <h2>Nice choice! Let's go... ✔️</h2>
-            <p>Sach me, it's going to be great, <span class="name-highlight">Dr. Avisha!</span> Location reveal ho gaya, par wahan se view aur thandi hawayein sach me bohot chill hain. <br><br>Aap bilkul tension free hoker bas aaram karo, plan is officially locked! Thank you! ✨👊</p>
+        <div class="options-bar">
+            <button class="action-btn" onclick="openReviewModal()">⭐ Rate Platform</button>
+            <button class="action-btn" onclick="toggleTheme()">🌓 Theme Mode</button>
+            <button class="action-btn" onclick="copyStreamLink()">📋 Share Link</button>
+        </div>
+    </div>
+
+    <!-- Feedback Feature Terminal Box -->
+    <div class="modal" id="reviewModal">
+        <div class="modal-content">
+            <h3>Rate the Project Stream</h3>
+            <p style="font-size:0.9rem; margin-top:5px; opacity:0.8;">How smooth is this custom web page setup running?</p>
+            <div class="stars-row">
+                <span class="star-input" onclick="setStars(1)">★</span>
+                <span class="star-input" onclick="setStars(2)">★</span>
+                <span class="star-input" onclick="setStars(3)">★</span>
+                <span class="star-input" onclick="setStars(4)">★</span>
+                <span class="star-input" onclick="setStars(5)">★</span>
+            </div>
+            <button class="btn-gate" onclick="closeReviewModal()">Submit Review</button>
         </div>
     </div>
 
     <script>
-        let clickCount = 0;
-        let isAbsolute = false;
-
-        function dodgeButton(event) {
-            if (event) event.preventDefault(); 
+        function startLoadingSystem() {
+            document.getElementById('introOverlay').classList.add('hidden');
+            const loader = document.getElementById('loaderContainer');
+            loader.style.display = 'flex';
             
-            const noBtn = document.getElementById('noBtn');
-            const card = document.getElementById('mainCard');
+            let progressBar = document.getElementById('progressBar');
+            let percentage = 0;
             
-            clickCount++;
-            
-            if (!isAbsolute) {
-                noBtn.style.position = 'absolute';
-                isAbsolute = true;
-            }
-            
-            let scale = Math.max(1 - clickCount * 0.12, 0.55);
-            noBtn.style.transform = `scale(${scale})`;
-            
-            if(clickCount >= 3) {
-                noBtn.innerText = "🥺";
-            }
-
-            // Confine strictly inside the smaller card bounds
-            const padding = 12;
-            const maxX = card.clientWidth - noBtn.clientWidth - padding;
-            const maxY = card.clientHeight - noBtn.clientHeight - padding;
-            
-            const randomX = Math.floor(Math.random() * maxX);
-            // Positions the running button safely inside the lower section of the card
-            const randomY = Math.floor(Math.random() * (maxY - 160)) + 140; 
-            
-            noBtn.style.left = randomX + 'px';
-            noBtn.style.top = randomY + 'px';
+            let interval = setInterval(() => {
+                percentage += 4;
+                progressBar.style.width = percentage + '%';
+                if(percentage >= 100) {
+                    clearInterval(interval);
+                    loader.style.display = 'none';
+                    document.getElementById('mainContainer').classList.add('visible');
+                }
+            }, 80);
         }
 
-        function showCelebration() {
-            document.getElementById('questionScreen').style.display = 'none';
-            document.getElementById('celebrationScreen').style.display = 'block';
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+        }
+
+        function openReviewModal() {
+            document.getElementById('reviewModal').classList.add('open');
+        }
+
+        function closeReviewModal() {
+            document.getElementById('reviewModal').classList.remove('open');
+            alert('Review compiled! Thank you for testing the server codebase.');
+        }
+
+        function setStars(count) {
+            const stars = document.querySelectorAll('.star-input');
+            stars.forEach((star, index) => {
+                if(index < count) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        function copyStreamLink() {
+            navigator.clipboard.writeText(window.location.href);
+            alert('Website URL copied to device clipboard.');
         }
     </script>
 </body>
