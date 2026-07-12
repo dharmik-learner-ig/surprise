@@ -297,7 +297,53 @@
     cursor: pointer;
     margin-top: 5px;
 }
+/* Floating Smart Toggle Button styling */
+        .maximize-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ff69b4;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 2200;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .maximize-btn:active {
+            transform: scale(0.95);
+        }
 
+        /* Landscape rotation view class for mobile */
+        .landscape-mode {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            z-index: 9999 !important;
+            transform: rotate(90deg) !important;
+            transform-origin: center center !important;
+            object-fit: contain !important;
+            background-color: #000000;
+        }
+        
+        /* Adjust wrapper bounds when rotated */
+        .video-wrapper.rotated-wrapper {
+            width: 100vh !important;
+            height: 100vw !important;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(90deg);
+            transform-origin: center center;
+        }
     </style>
 </head>
 <body>
@@ -506,19 +552,14 @@
     <!-- Mobile-Optimized Immersive Video Player Window -->
     <div class="player-modal" id="playerModal">
         <div class="close-btn" onclick="closePlayer()">&times;</div>
+        <button class="maximize-btn" onclick="toggleSmartView()">🔄 Fullscreen & Rotate</button>
         <div class="video-wrapper">
-            <div class="video-aspect">
-                <video id="mainVideo" controls playsinline preload="auto">
-                    <source id="videoSource" src="" type="video/mp4">
-                    Your browser does not support HTML5 video playback.
-                </video>
             </div>
-        </div>
         <div class="player-info-bar">
             <div class="player-info-title" id="playerMovieTitle">Movie Title</div>
         </div>
     </div>
-  <script>
+ <script>
         const searchInput = document.getElementById('searchInput');
         const cards = document.querySelectorAll('.card');
 
@@ -548,7 +589,6 @@
         const playerTitle = document.getElementById('playerMovieTitle');
         const videoWrapper = document.querySelector('.video-wrapper');
 
-        // Bulletproof player for regular movies
         function playMovie(element) {
             const posterArea = element.querySelector('.poster-area');
             const driveId = posterArea.getAttribute('data-drive-id');
@@ -561,10 +601,9 @@
 
             playerTitle.textContent = title;
             
-            // Replaced video tag with a universal preview embed iframe that works everywhere
             videoWrapper.innerHTML = `
                 <div class="video-aspect">
-                    <iframe src="https://drive.google.com/file/d/${driveId}/preview" 
+                    <iframe id="embedPlayer" src="https://drive.google.com/file/d/${driveId}/preview" 
                             width="100%" 
                             height="100%" 
                             style="position: absolute; top:0; left:0; border: none; width: 100%; height: 100%;" 
@@ -576,7 +615,6 @@
             modal.classList.add('active');
         }
 
-        // Bulletproof player for series episodes
         function playEpisode(selectElement, seriesTitle) {
             const driveId = selectElement.value;
             if (!driveId) return;
@@ -584,10 +622,9 @@
             const selectedText = selectElement.options[selectElement.selectedIndex].text;
             playerTitle.textContent = `${seriesTitle} - ${selectedText}`;
             
-            // Replaced video tag with a universal preview embed iframe that works everywhere
             videoWrapper.innerHTML = `
                 <div class="video-aspect">
-                    <iframe src="https://drive.google.com/file/d/${driveId}/preview" 
+                    <iframe id="embedPlayer" src="https://drive.google.com/file/d/${driveId}/preview" 
                             width="100%" 
                             height="100%" 
                             style="position: absolute; top:0; left:0; border: none; width: 100%; height: 100%;" 
@@ -600,10 +637,25 @@
             selectElement.value = "";
         }
 
+        // Handles switching between normal and horizontal maximized view orientations
+        function toggleSmartView() {
+            const iframe = document.getElementById('embedPlayer');
+            if (!iframe) return;
+
+            // Toggle CSS classes to rotate the view elements by 90 degrees
+            iframe.classList.toggle('landscape-mode');
+            videoWrapper.classList.toggle('rotated-wrapper');
+        }
+
         function closePlayer() {
+            // Ensure classes are cleared out when user closes the view
+            const iframe = document.getElementById('embedPlayer');
+            if (iframe) iframe.classList.remove('landscape-mode');
+            videoWrapper.classList.remove('rotated-wrapper');
+            
             videoWrapper.innerHTML = ''; 
             modal.classList.remove('active');
         }
-    </script>    
+    </script>
 </body>
 </html>
