@@ -284,6 +284,20 @@
             font-weight: bold;
             color: #ffb6c1;
         }
+        .episode-select {
+    width: 100%;
+    padding: 6px 10px;
+    border-radius: 12px;
+    border: 2px solid #ffb6c1;
+    background-color: #ffffff;
+    color: #ff69b4;
+    font-weight: bold;
+    font-size: 0.8rem;
+    outline: none;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
     </style>
 </head>
 <body>
@@ -326,7 +340,7 @@
             </div>
 
             <div class="card" data-title="Dhanak" data-cat="gujurati" onclick="playMovie(this)">
-                <div class="poster-area p-dhanak" data-drive-id="YOUR_DRIVE_FILE_ID_HERE"style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB7n5iwDMxgF4S0bV4um8YocOzNBRH4Fr2UMmmrTck4mMTxcMfAruo1dA_BojmLwcytXRz&s=10') !important; background-size: cover; background-position: center;">
+                <div class="poster-area p-dhanak" data-drive-id="1e0EX5cS6QsssklYYnA39KFYvTry4YftR"style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB7n5iwDMxgF4S0bV4um8YocOzNBRH4Fr2UMmmrTck4mMTxcMfAruo1dA_BojmLwcytXRz&s=10') !important; background-size: cover; background-position: center;">
                     <span class="tag-badge">Movie</span>
                     <div class="poster-overlay">
                         <div class="meta-title">Dhanak</div>
@@ -337,7 +351,7 @@
 
             <!-- HOLLYWOOD SECTION -->
             <div class="card" data-title="Moana 1" data-cat="hollywood" onclick="playMovie(this)">
-                <div class="poster-area p-moana1" data-drive-id="YOUR_DRIVE_FILE_ID_HERE"style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmTsO-kVq40uXGALrBAQFryLSHdUCuWchn5SxL5OHraw&s') !important; background-size: cover; background-position: center;">
+                <div class="poster-area p-moana1" data-drive-id="11OBiiCmefM4Xx82-8tK22y9MzX60Q3sx"style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmTsO-kVq40uXGALrBAQFryLSHdUCuWchn5SxL5OHraw&s') !important; background-size: cover; background-position: center;">
                     <span class="tag-badge">Movie</span>
                     <div class="poster-overlay">
                         <div class="meta-title">Moana 1</div>
@@ -347,7 +361,7 @@
             </div>
 
             <div class="card" data-title="Moana 2" data-cat="hollywood" onclick="playMovie(this)">
-                <div class="poster-area p-moana2" data-drive-id="YOUR_DRIVE_FILE_ID_HERE"style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjlaCsHyHSV1Gf-tm2DEvx3Ohz6Ma6nSI9tuf3l8BM7MzBmSkWKliMKYxd&s=10') !important; background-size: cover; background-position: center;">
+                <div class="poster-area p-moana2" data-drive-id="1Y7ZRX0-3ULOPQFVEjoMjOgZCVc7jRNmF"style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjlaCsHyHSV1Gf-tm2DEvx3Ohz6Ma6nSI9tuf3l8BM7MzBmSkWKliMKYxd&s=10') !important; background-size: cover; background-position: center;">
                     <span class="tag-badge">Movie</span>
                     <div class="poster-overlay">
                         <div class="meta-title">Moana 2</div>
@@ -377,16 +391,24 @@
             </div>
 
             <!-- SERIES SECTION -->
-            <div class="card" data-title="Richie Rich (Series)" data-cat="series" onclick="playMovie(this)">
-                <div class="poster-area p-richie-s" data-drive-id="YOUR_DRIVE_FILE_ID_HERE"style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTbC8AveAFLmCePgFtqC6Gg8UOrJ28ZB_Z8ANTRgCivQ&s=10') !important; background-size: cover; background-position: center;">
-                    <span class="tag-badge">Series</span>
-                    <div class="poster-overlay">
-                        <div class="meta-title">Richie Rich</div>
-                        <div class="meta-sub">TV Show</div>
-                    </div>
-                </div>
+          <div class="card" data-title="Richie Rich (Series)" data-cat="series">
+    <!-- Updated with the actual Richie Rich poster image link below -->
+    <div class="poster-area p-richie-s" style="background-image: url('https://m.media-amazon.com/images/S/pv-target-images/d6ba720dbb1c823d254fedc372484db8539caa8db21b1f9e6d910a7231a4e95d.jpg'); background-size: cover; background-position: center;">
+        <span class="tag-badge">Series</span>
+        <div class="poster-overlay">
+            <div class="meta-title">Richie Rich</div>
+            <div class="meta-sub">
+                <select class="episode-select" onchange="playEpisode(this, 'Richie Rich')">
+                    <option value="" disabled selected>Select Episode ✨</option>
+                    <option value="1J0HZDd0pIZxLw762tM3HksNanQu7oMCU">Episode 1</option>
+                    <option value="1ghryXp4QBmX6pMKT_nhQqHsrEHIzVIdY">Episode 2</option>
+                    <option value="1LUUKyHXsqrV6pUEHZvOz_nWrMiaMDdvM">Episode 3</option>
+                    <option value="1iWuTXFrfEa3JJfTfOs-oLuKMWzJ2CLc0">Episode 4</option>
+                </select>
             </div>
-
+        </div>
+    </div>
+</div>
             <!-- GUJARATI SECTION -->
             <div class="card" data-title="Maharani" data-cat="gujarati" onclick="playMovie(this)">
                 <div class="poster-area p-maharani" data-drive-id="YOUR_DRIVE_FILE_ID_HERE"style="background-image: url('https://m.media-amazon.com/images/M/MV5BYWQ5MzkzODEtMGVmMC00ZTA3LTk2NjktY2M0N2UxZTk3ODJiXkEyXkFqcGc@._V1_.jpg') !important; background-size: cover; background-position: center;">
@@ -510,7 +532,11 @@
 
         function filterCategory(cat) {
             document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
+            if(window.event && window.event.target) {
+                window.event.target.classList.add('active');
+            } else if (event && event.target) {
+                event.target.classList.add('active');
+            }
 
             cards.forEach(card => {
                 card.style.display = (cat === 'all' || card.getAttribute('data-cat') === cat) ? 'flex' : 'none';
@@ -522,26 +548,27 @@
         const playerTitle = document.getElementById('playerMovieTitle');
         const videoWrapper = document.querySelector('.video-wrapper');
 
+        // Bulletproof player for regular movies
         function playMovie(element) {
             const posterArea = element.querySelector('.poster-area');
             const driveId = posterArea.getAttribute('data-drive-id');
             const title = element.getAttribute('data-title');
 
             if (!driveId || driveId.includes('YOUR_DRIVE_FILE_ID_HERE')) {
-                alert('Please edit the HTML code and paste your actual Google Drive File ID inside data-drive-id for: "' + title + '"');
+                alert('Please add a valid Google Drive File ID for: "' + title + '"');
                 return;
             }
 
             playerTitle.textContent = title;
             
-            // This replaces the broken raw video player with a smooth Google Drive embed frame
+            // Replaced video tag with a universal preview embed iframe that works everywhere
             videoWrapper.innerHTML = `
                 <div class="video-aspect">
                     <iframe src="https://drive.google.com/file/d/${driveId}/preview" 
                             width="100%" 
                             height="100%" 
-                            style="position: absolute; top:0; left:0; border: none;" 
-                            allow="autoplay" 
+                            style="position: absolute; top:0; left:0; border: none; width: 100%; height: 100%;" 
+                            allow="autoplay; encrypted-media" 
                             allowfullscreen>
                     </iframe>
                 </div>`;
@@ -549,10 +576,34 @@
             modal.classList.add('active');
         }
 
+        // Bulletproof player for series episodes
+        function playEpisode(selectElement, seriesTitle) {
+            const driveId = selectElement.value;
+            if (!driveId) return;
+
+            const selectedText = selectElement.options[selectElement.selectedIndex].text;
+            playerTitle.textContent = `${seriesTitle} - ${selectedText}`;
+            
+            // Replaced video tag with a universal preview embed iframe that works everywhere
+            videoWrapper.innerHTML = `
+                <div class="video-aspect">
+                    <iframe src="https://drive.google.com/file/d/${driveId}/preview" 
+                            width="100%" 
+                            height="100%" 
+                            style="position: absolute; top:0; left:0; border: none; width: 100%; height: 100%;" 
+                            allow="autoplay; encrypted-media" 
+                            allowfullscreen>
+                    </iframe>
+                </div>`;
+            
+            modal.classList.add('active');
+            selectElement.value = "";
+        }
+
         function closePlayer() {
-            videoWrapper.innerHTML = ''; // Safely clears and stops the video player
+            videoWrapper.innerHTML = ''; 
             modal.classList.remove('active');
         }
-    </script>
-    </body>
+    </script>    
+</body>
 </html>
